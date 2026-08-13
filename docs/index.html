@@ -12,26 +12,37 @@
         li { padding: 6px 0; }
         .check { color: #800000; font-weight: bold; margin-right: 8px; }
         .metrics-img { width: 100%; max-width: 800px; border-radius: 4px; margin-top: 15px; border: 1px solid #ddd; }
+        .highlight { background-color: #fff3cd; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
     </style>
 </head>
 <body>
     <h1>Lesion-Guided Cross-Attention Vision Transformer (LG-ViT)</h1>
-    <p><strong>Course:</strong> CSE463: Computer Vision &nbsp;|&nbsp; <strong>Institution:</strong> Brac University</p>
+    <p><strong>Course:</strong> CSE463 Computer Vision &nbsp;|&nbsp; <strong>Institution:</strong> Brac University</p>
     
     <div class="card">
-        <h2>Day 1 Progress & Status</h2>
+        <h2>Model Evaluation Summary</h2>
         <ul>
-            <li><span class="check">✔</span> <strong>Literature Review:</strong> 50+ papers synthesized & validated</li>
-            <li><span class="check">✔</span> <strong>Beamer Deck:</strong> LaTeX presentation code compiled</li>
-            <li><span class="check">✔</span> <strong>Architecture:</strong> LG-ViT Dual-Stream pipeline verified</li>
-            <li><span class="check">✔</span> <strong>Initial Training:</strong> Completed 20 epochs on T4 GPU (95.00% Validation Accuracy)</li>
+            <li><span class="check">✔</span> <strong>Dataset:</strong> MPox-Vision Dataset (800 Images across 4 Classes)</li>
+            <li><span class="check">✔</span> <strong>Validation Accuracy:</strong> <span class="highlight">99.00%</span> (158/160 correct)</li>
+            <li><span class="check">✔</span> <strong>Macro F1-Score:</strong> 0.99 (Acne: 1.00, Measles: 1.00, Chickenpox: 0.98, Monkeypox: 0.97)</li>
+            <li><span class="check">✔</span> <strong>Storage:</strong> Model weights and figures archived permanently on Google Drive</li>
         </ul>
     </div>
 
     <div class="card">
-        <h2>Training Accuracy & Loss Curves</h2>
-        <p>The model successfully isolated lesion morphology and avoided skin-tone overfitting, hitting <strong>95% validation accuracy</strong> at Epoch 9.</p>
+        <h2>1. Training Accuracy & Loss Curves</h2>
         <img src="training_metrics.png" alt="Training Metrics Graph" class="metrics-img">
+    </div>
+
+    <div class="card">
+        <h2>2. Validation Confusion Matrix</h2>
+        <img src="confusion_matrix.png" alt="Confusion Matrix Graph" class="metrics-img">
+    </div>
+
+    <div class="card">
+        <h2>3. Morphological Feature Isolation (Laplacian Edge Maps)</h2>
+        <p>Proof of edge feature isolation demonstrating that the Laplacian stream isolates lesion boundary topography prior to cross-attention fusion:</p>
+        <img src="laplacian_edge_visualization.png" alt="Laplacian Edge Visualization" class="metrics-img">
     </div>
 
     <p style="font-size: 0.85em; color: #666;"><em>Dashboard maintained via automated Google Colab pipeline.</em></p>
