@@ -9,11 +9,8 @@
         h1 { color: #800000; border-bottom: 2px solid #800000; padding-bottom: 5px; margin-bottom: 5px; }
         h2 { color: #800000; margin-top: 0; }
         .header-sub { margin-top: 0; color: #555; font-size: 0.95em; margin-bottom: 30px; }
-
-        /* Timeline Card Styling */
-        .card { background: #fdfdfd; border-left: 5px solid #800000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 30px; border-radius: 4px; position: relative; }
+        .card { background: #fdfdfd; border-left: 5px solid #800000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 30px; border-radius: 4px; }
         .timestamp { font-size: 0.85em; color: #666; font-weight: bold; margin-bottom: 15px; display: inline-block; background: #eee; padding: 3px 8px; border-radius: 3px; }
-
         ul { list-style-type: none; padding-left: 0; margin-top: 10px; }
         li { padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
         li:last-child { border-bottom: none; }
@@ -25,33 +22,38 @@
 <body>
     <h1>LG-ViT: Lesion-Guided Cross-Attention Vision Transformer</h1>
     <p class="header-sub"><strong>Course:</strong> CSE463 Computer Vision &nbsp;|&nbsp; <strong>Institution:</strong> Brac University</p>
+    
+    <!-- PHASE 3: EXPLAINABILITY & ATTENTION -->
+    <div class="card">
+        <div class="timestamp">Updated: Friday, August 14, 2026 at 10:20 PM BDT</div>
+        <h2>Phase 3: Explainable AI & Cross-Attention Rollout</h2>
+        <p>Extracted self-attention and cross-attention weight matrices to visually verify feature localization.</p>
+        <ul>
+            <li><span class="check">✔</span> <strong>Attention Verification:</strong> Attention maps confirm high response density localized on lesion topography rather than non-lesional epidermal regions.</li>
+        </ul>
+        <img src="attention_heatmaps.png" alt="Attention Heatmaps" class="metrics-img">
+    </div>
 
     <!-- PHASE 2: EVALUATION LOG -->
     <div class="card">
-        <div class="timestamp">Updated: Thursday, August 13, 2026 at 05:27 PM BDT</div>
+        <div class="timestamp">Phase 2: Comprehensive Evaluation</div>
         <h2>Phase 2: Deep Evaluation & Feature Visualizations</h2>
-        <p>Executed full evaluation pipeline to validate model against class-imbalance and feature-isolation metrics.</p>
         <ul>
-            <li><span class="check">✔</span> <strong>Validation Accuracy Achieved:</strong> <span class="highlight">99.00%</span> (158/160 correct)</li>
+            <li><span class="check">✔</span> <strong>Validation Accuracy:</strong> <span class="highlight">99.00%</span> (158/160 correct)</li>
             <li><span class="check">✔</span> <strong>Macro F1-Score:</strong> 0.99 (Acne: 1.00, Measles: 1.00, Chickenpox: 0.98, Monkeypox: 0.97)</li>
-            <li><span class="check">✔</span> <strong>Visual Proof:</strong> Generated Laplacian Edge Maps to prove the morphological edge-stream isolates lesion topology independent of skin tone.</li>
+            <li><span class="check">✔</span> <strong>Morphology Isolation:</strong> 2nd-order Laplacian kernel extracts edge gradient tokens independently.</li>
         </ul>
-
         <img src="confusion_matrix.png" alt="Confusion Matrix Graph" class="metrics-img">
         <img src="laplacian_edge_visualization.png" alt="Laplacian Edge Visualization" class="metrics-img">
     </div>
 
     <!-- PHASE 1: INITIAL TRAINING LOG -->
     <div class="card">
-        <div class="timestamp">Archived: Initial Training Phase</div>
-        <h2>Phase 1: Architecture Build & Baseline Training</h2>
-        <p>Constructed the dual-stream pipeline and ran the initial 20-epoch training loop to establish baseline convergence.</p>
+        <div class="timestamp">Phase 1: Baseline Convergence</div>
+        <h2>Phase 1: Architecture Build & Initial Run</h2>
         <ul>
-            <li><span class="check">✔</span> <strong>Literature Review:</strong> 50+ papers synthesized & pipeline gaps validated</li>
-            <li><span class="check">✔</span> <strong>Architecture:</strong> LG-ViT Dual-Stream pipeline successfully compiled</li>
-            <li><span class="check">✔</span> <strong>Initial Training Milestone:</strong> Hit 95.00% Validation Accuracy at Epoch 9 on T4 GPU</li>
+            <li><span class="check">✔</span> <strong>Model Convergence:</strong> Rapid convergence within 9 epochs on T4 GPU</li>
         </ul>
-
         <img src="training_metrics.png" alt="Training Metrics Graph" class="metrics-img">
     </div>
 
