@@ -99,12 +99,61 @@
     <h1>LG-ViT: Lesion-Guided Vision Transformer</h1>
     <p class="header-sub"><strong>Dual-Stream Morphological Cross-Attention for Bias-Mitigated Diagnostics</strong></p>
 
-    <!-- PHASE 5: GENERALIZABILITY BENCHMARK (HAM10000) -->
+    <!-- PHASE 6: MULTI-DOMAIN BLIND BENCHMARK & EXPLAINABILITY -->
     <div class="card">
-        <div class="timestamp">Updated: Saturday, August 15, 2026 at 02:14 AM BDT</div>
+        <div class="timestamp">Updated: Saturday, August 15, 2026 at 10:46 PM BDT</div>
+        <h2>Phase 6: Multi-Domain Stratified Blind Benchmark & Explainability</h2>
+        <p>Evaluated on a strict <strong>70/15/15 Stratified Split</strong> across independent viral and neoplastic pathology benchmarks (evaluated exclusively on held-out test partitions):</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Clinical Benchmark</th>
+                    <th>Pathology Type</th>
+                    <th>Blind Test Size</th>
+                    <th>Accuracy</th>
+                    <th>Macro F1</th>
+                    <th>Weighted F1</th>
+                    <th>Macro ROC-AUC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>MPox-Vision</strong></td>
+                    <td>Viral Rash Differentiation (4 Classes)</td>
+                    <td>120 Images</td>
+                    <td><span class="badge-win">97.50%</span></td>
+                    <td><span class="badge-win">0.9749</span></td>
+                    <td>0.9749</td>
+                    <td><span class="badge-win">0.9867</span></td>
+                </tr>
+                <tr>
+                    <td><strong>HAM10000</strong></td>
+                    <td>Pigmented Lesion Oncology (7 Classes)</td>
+                    <td>1,503 Images</td>
+                    <td><span class="badge-win">83.10%</span></td>
+                    <td>0.7211</td>
+                    <td><span class="badge-win">0.8400</span></td>
+                    <td><span class="badge-win">0.9674</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><strong>Zero False Positive Viral Screening:</strong> On MPox-Vision, achieved <strong>1.0000 Precision</strong> on Monkeypox and Measles with <strong>0.9867 Macro ROC-AUC</strong>, verifying that Laplacian edge guidance prevents shortcut learning on background skin tones.</li>
+            <li><strong>High Pre-Cancer Sensitivity:</strong> On HAM10000, square-root frequency weighting yielded <strong>85.71% Recall (Sensitivity) on Actinic Keratoses (AKIEC)</strong> and <strong>76.62% on Basal Cell Carcinomas (BCC)</strong>.</li>
+            <li><strong>Biopsy Reduction:</strong> Achieved <strong>94.74% Precision on benign Melanocytic Nevi (NV)</strong> across 1,006 blind test images, minimizing false alarms in screening workflows.</li>
+        </ul>
+        <img src="mpox_roc_auc.png" alt="MPox Multi-Class ROC-AUC" class="metrics-img" onerror="this.style.display='none'">
+        <img src="mpox_confusion_matrix.png" alt="MPox Normalized Confusion Matrix" class="metrics-img" onerror="this.style.display='none'">
+        <img src="mpox_attention_maps.png" alt="LG-ViT Cross-Attention Topography" class="metrics-img" onerror="this.style.display='none'">
+    </div>
+
+    <!-- PHASE 5: GENERALIZABILITY BENCHMARK (HAM10000) -->
+    <div class="card card-archive">
+        <div class="timestamp">Phase 5 Milestone</div>
         <h2>Phase 5: Multi-Class Neoplasm Generalizability (HAM10000 Benchmark)</h2>
         <p>Ablation evaluation across 10,015 dermoscopy images (7 classes, Seed 42, 10 Epochs):</p>
-        
+
         <table>
             <thead>
                 <tr>
@@ -154,11 +203,11 @@
     </div>
 
     <!-- PHASE 4: BIAS MITIGATION & ABLATION STUDY -->
-    <div class="card">
+    <div class="card card-archive">
         <div class="timestamp">Phase 4 Milestone</div>
         <h2>Phase 4: Bias Mitigation & Attention Explainability (MPox-Vision)</h2>
         <p>Proved standard ViT suffers from shortcut learning on background skin tones, whereas LG-ViT enforces topographical lesion localization.</p>
-        
+
         <table>
             <thead>
                 <tr>
