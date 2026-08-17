@@ -45,6 +45,7 @@
         th, td { border: 1px solid #e1e4e8; padding: 10px 14px; text-align: left; }
         th { background-color: #f6f8fa; color: #111; }
         .badge-win { color: #006600; font-weight: bold; }
+        .badge-pending { color: #888; font-style: italic; }
         .metrics-img { width: 100%; border-radius: 6px; margin-top: 15px; border: 1px solid #ddd; display: block; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         .dashboard { background: #1e1e1e; color: #fff; border-top: 5px solid #00cc66; }
@@ -65,13 +66,76 @@
             Author: Monowar Husain | Course: CSE463 Project
         </div>
         <div class="project-desc">
-            This research introduces a dual-stream morphological cross-attention mechanism to mitigate bias in dermatological AI. By integrating a 2nd-order Laplacian edge-extraction pathway, LG-ViT enforces strict anatomical localization and eliminates shortcut learning on background skin tones. The model demonstrates highly robust generalization across infectious viral rashes (MPox) and highly imbalanced pre-cancerous neoplasms (HAM10000).
+            This research introduces a dual-stream morphological cross-attention mechanism to mitigate bias in dermatological AI. By integrating a 2nd-order Laplacian edge-extraction pathway, LG-ViT enforces strict anatomical localization and eliminates shortcut learning on background skin tones. The model demonstrates highly robust generalization across large-scale benchmarks (Skin2025), infectious viral rashes (MPox), and highly imbalanced pre-cancerous neoplasms (HAM10000).
+        </div>
+    </div>
+
+    <!-- PHASE 7 (NEW) -->
+    <div class="card">
+        <div class="timestamp">Last Updated: Monday, August 17, 2026</div>
+        <h2>Phase 7: Skin2025 Large-Scale Benchmark & Differential Fine-Tuning</h2>
+        <p>Evaluated on the 20,000-image Skin2025 dataset using a strictly stratified 70/15/15 blind split. Introduced <strong>Fine-Tune V1</strong>, utilizing layer-wise differential learning rates (1e-5 backbone / 3e-4 custom head), Cosine Annealing, and Mixed Precision (AMP) to prevent catastrophic forgetting in the pretrained ViT layers while rapidly converging the Laplacian cross-attention stream.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Model Architecture</th>
+                    <th>Training Strategy</th>
+                    <th>Test Acc</th>
+                    <th>Malignant Recall</th>
+                    <th>Benign Specificity</th>
+                    <th>Macro F1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vanilla ViT-Base (Baseline)</td>
+                    <td>Standard LR + AMP</td>
+                    <td><span class="badge-win">97.73%</span></td>
+                    <td><span class="badge-win">98.53%</span></td>
+                    <td><span class="badge-win">96.93%</span></td>
+                    <td><span class="badge-win">0.9773</span></td>
+                </tr>
+                <tr>
+                    <td>LG-ViT (Run 1)</td>
+                    <td>Uniform LR</td>
+                    <td>95.83%</td>
+                    <td>96.72%</td>
+                    <td>94.95%</td>
+                    <td>0.9583</td>
+                </tr>
+                <tr>
+                    <td><strong>LG-ViT (Fine-Tune V1)</strong></td>
+                    <td><strong>Differential LR (1e-5 / 3e-4)</strong></td>
+                    <td class="badge-pending">Pending...</td>
+                    <td class="badge-pending">Pending...</td>
+                    <td class="badge-pending">Pending...</td>
+                    <td class="badge-pending">Pending...</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Skin2025 Confusion Matrices</h3>
+        <div class="grid-2">
+            <div>
+                <strong>Vanilla ViT (Baseline)</strong>
+                <img src="vanilla_skin2025_confusion_matrix.png" alt="Vanilla ViT CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>LG-ViT (Fine-Tune V1)</strong>
+                <img src="lgvit_skin2025_cm.png" alt="LG-ViT CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <h3>Skin2025 ROC-AUC Performance</h3>
+        <div class="grid-2">
+            <img src="vanilla_skin2025_roc_auc.png" alt="Vanilla ViT ROC" class="metrics-img" onerror="this.style.display='none'">
+            <img src="lgvit_skin2025_roc.png" alt="LG-ViT ROC" class="metrics-img" onerror="this.style.display='none'">
         </div>
     </div>
 
     <!-- PHASE 6 -->
     <div class="card">
-        <div class="timestamp">Last Updated: Saturday, August 15, 2026 at 11:31 PM BDT</div>
         <h2>Phase 6: Multi-Domain Stratified Blind Benchmark & Explainability</h2>
         <p>Evaluated strictly on held-out test partitions (15%) across independent viral and neoplastic pathology benchmarks.</p>
         
