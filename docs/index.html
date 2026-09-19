@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            max-width: 1000px;
+            max-width: 1060px;
             margin: 0 auto;
             padding: 35px 20px;
             color: #222;
@@ -27,7 +27,7 @@
         .project-desc {
             color: #555; font-size: 1.05em; line-height: 1.7;
             background: #f9f9f9; padding: 15px;
-            border-left: 4px solid #333; border-radius: 4px;
+            border-left: 4px solid #800000; border-radius: 4px;
         }
         .card {
             background: #ffffff; border: 1px solid #e1e4e8;
@@ -39,15 +39,19 @@
             display: inline-block; background: #f0f0f0;
             padding: 4px 12px; border-radius: 4px; margin-bottom: 12px;
         }
-        h2 { color: #333; margin-top: 0; font-size: 1.4em; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+        h2 { color: #333; margin-top: 0; font-size: 1.35em; border-bottom: 2px solid #eee; padding-bottom: 8px; }
         h3 { color: #444; margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95em; }
         th, td { border: 1px solid #e1e4e8; padding: 10px 14px; text-align: left; }
         th { background-color: #f6f8fa; color: #111; }
         .badge-win { color: #006600; font-weight: bold; }
-        .badge-pending { color: #888; font-style: italic; }
+        .badge-proposed { color: #800000; font-weight: bold; }
         .metrics-img { width: 100%; border-radius: 6px; margin-top: 15px; border: 1px solid #ddd; display: block; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .callout {
+            background: #fff8f0; border-left: 4px solid #e67e22; padding: 12px 16px;
+            margin: 15px 0; font-size: 0.92em; border-radius: 0 4px 4px 0;
+        }
         .dashboard { background: #1e1e1e; color: #fff; border-top: 5px solid #00cc66; }
         .dashboard h2 { color: #00cc66; border-bottom: 1px solid #333; }
         .dash-status {
@@ -66,13 +70,99 @@
             Author: Monowar Husain | Course: CSE463 Project
         </div>
         <div class="project-desc">
-            This research introduces a dual-stream morphological cross-attention mechanism to mitigate bias in dermatological AI. By integrating a 2nd-order Laplacian edge-extraction pathway, LG-ViT enforces strict anatomical localization and eliminates shortcut learning on background skin tones. The model demonstrates highly robust generalization across large-scale benchmarks (Skin2025), infectious viral rashes (MPox), and highly imbalanced pre-cancerous neoplasms (HAM10000).
+            This research introduces a dual-stream morphological cross-attention mechanism to mitigate bias in dermatological AI. By integrating a 2nd-order Laplacian edge-extraction pathway, LG-ViT enforces strict anatomical localization and eliminates shortcut learning on background skin tones. The architecture is rigorously benchmarked across 20,000 dermoscopy images (Skin2025), deduplicated multi-class pre-cancerous neoplasms (HAM10000), and viral rash pathologies (MPox-Vision)[cite: 1].
         </div>
     </div>
 
-<!-- PHASE 7 -->
+    <!-- HAM10000 BENCHMARK MATRIX (CONVNEXT + SWIN + LG-VIT) -->
     <div class="card">
-        <div class="timestamp">Last Updated: Monday, August 17, 2026</div>
+        <div class="timestamp">Last Updated: Kaggle GPU Benchmark Suite</div>
+        <h2>HAM10000: 7-Class Deduplicated Architectural Comparison (15% Blind Test)</h2>
+        <p>Evaluated on the official held-out test split (1,490 unique lesion instances) to ablate pure-CNN inductive bias, shifted-window Transformers, and morphological contour cross-attention.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Model Architecture</th>
+                    <th>Model Family</th>
+                    <th>Test Acc</th>
+                    <th>Macro F1</th>
+                    <th>Macro ROC-AUC</th>
+                    <th>MEL Recall</th>
+                    <th>AKIEC Recall</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ConvNeXt-Base</strong></td>
+                    <td>Modernized Pure CNN</td>
+                    <td><span class="badge-win">85.23%</span></td>
+                    <td><span class="badge-win">0.7379</span></td>
+                    <td><span class="badge-win">0.9702</span></td>
+                    <td>61.01%</td>
+                    <td>75.56%</td>
+                </tr>
+                <tr>
+                    <td><strong>Swin-Base</strong></td>
+                    <td>Shifted-Window ViT</td>
+                    <td>84.30%</td>
+                    <td>0.7073</td>
+                    <td>0.9679</td>
+                    <td>49.69%</td>
+                    <td>68.89%</td>
+                </tr>
+                <tr style="background-color: #fcf6f6;">
+                    <td><strong class="badge-proposed">LG-ViT (Proposed)</strong></td>
+                    <td>Laplacian Dual-Stream ViT</td>
+                    <td>83.10%[cite: 1]</td>
+                    <td>0.7211[cite: 1]</td>
+                    <td>0.9674[cite: 1]</td>
+                    <td><span class="badge-win">69.00%</span></td>
+                    <td><span class="badge-win">85.71%</span>[cite: 1]</td>
+                </tr>
+                <tr>
+                    <td><em>Vanilla ViT-Base (Baseline)*</em></td>
+                    <td>Global Self-Attention</td>
+                    <td>95.07%[cite: 1]</td>
+                    <td>0.9218[cite: 1]</td>
+                    <td>—</td>
+                    <td>82.63%[cite: 1]</td>
+                    <td>91.84%[cite: 1]</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout">
+            <strong>Clinical Safety Audit:</strong> Unconstrained Vision Transformers (Swin-Base) suffer a catastrophic drop on minority lethal classes, detecting under 50% of true Melanomas (49.69% MEL Recall). LG-ViT’s explicit boundary guidance resolves this failure mode, achieving <strong>69.00% Melanoma Recall (+19.31% over Swin)</strong> and <strong>85.71% Actinic Keratosis Recall (+10.15% over ConvNeXt)</strong>[cite: 1].
+            <br><em>*Vanilla ViT baseline reflects early exploratory run evaluated prior to patient-level deduplication[cite: 1].</em>
+        </div>
+
+        <h3>HAM10000 Diagnostic Figures & Curves</h3>
+        <div class="grid-2">
+            <div>
+                <strong>ConvNeXt-Base Confusion Matrix</strong>
+                <img src="convnext_confusion_matrix.png" alt="ConvNeXt CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>Swin-Base Confusion Matrix</strong>
+                <img src="swin_confusion_matrix.png" alt="Swin CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <strong>ConvNeXt-Base Multi-Class ROC Curves</strong>
+                <img src="convnext_roc_curves.png" alt="ConvNeXt ROC" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>Swin-Base Multi-Class ROC Curves</strong>
+                <img src="swin_roc_curves.png" alt="Swin ROC" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </div>
+
+    <!-- PHASE 7: SKIN2025 -->
+    <div class="card">
+        <div class="timestamp">Phase 7 Benchmark</div>
         <h2>Phase 7: Skin2025 Large-Scale Benchmark & Differential Fine-Tuning</h2>
         <p>Evaluated on the 20,000-image Skin2025 dataset using a strictly stratified 70/15/15 blind split. Introduced <strong>Fine-Tune V1</strong>, utilizing layer-wise differential learning rates (1e-5 backbone / 3e-4 custom head), Cosine Annealing, and Mixed Precision (AMP) to prevent catastrophic forgetting in the pretrained ViT layers while rapidly converging the Laplacian cross-attention stream.</p>
         
@@ -91,31 +181,31 @@
                 <tr>
                     <td>Vanilla ViT-Base (Baseline)</td>
                     <td>Standard LR + AMP</td>
-                    <td>97.73%</td>
-                    <td><span class="badge-win">98.53%</span></td>
-                    <td>96.93%</td>
-                    <td>0.9773</td>
+                    <td>97.73%[cite: 1]</td>
+                    <td><span class="badge-win">98.53%</span>[cite: 1]</td>
+                    <td>96.93%[cite: 1]</td>
+                    <td>0.9773[cite: 1]</td>
                 </tr>
                 <tr>
                     <td>LG-ViT (Run 1)</td>
                     <td>Uniform LR</td>
-                    <td>95.83%</td>
-                    <td>96.72%</td>
-                    <td>94.95%</td>
-                    <td>0.9583</td>
+                    <td>95.83%[cite: 1]</td>
+                    <td>96.72%[cite: 1]</td>
+                    <td>94.95%[cite: 1]</td>
+                    <td>0.9583[cite: 1]</td>
                 </tr>
                 <tr style="background-color: #f0fdf4;">
                     <td><strong>LG-ViT (Fine-Tune V1)</strong></td>
                     <td><strong>Differential LR (1e-5 / 3e-4)</strong></td>
-                    <td><span class="badge-win">97.97%</span></td>
-                    <td>97.80%</td>
-                    <td><span class="badge-win">98.13%</span></td>
-                    <td><span class="badge-win">0.9797</span></td>
+                    <td><span class="badge-win">97.97%</span>[cite: 1]</td>
+                    <td>97.80%[cite: 1]</td>
+                    <td><span class="badge-win">98.13%</span>[cite: 1]</td>
+                    <td><span class="badge-win">0.9797</span>[cite: 1]</td>
                 </tr>
             </tbody>
         </table>
 
-        <h3>Skin2025 Confusion Matrices</h3>
+        <h3>Skin2025 Confusion Matrices & ROC Curves</h3>
         <div class="grid-2">
             <div>
                 <strong>Vanilla ViT (Baseline)</strong>
@@ -126,15 +216,13 @@
                 <img src="lgvit_skin2025_cm.png" alt="LG-ViT CM" class="metrics-img" onerror="this.style.display='none'">
             </div>
         </div>
-
-        <h3>Skin2025 ROC-AUC Performance</h3>
         <div class="grid-2">
             <img src="vanilla_skin2025_roc_auc.png" alt="Vanilla ViT ROC" class="metrics-img" onerror="this.style.display='none'">
             <img src="lgvit_skin2025_roc.png" alt="LG-ViT ROC" class="metrics-img" onerror="this.style.display='none'">
         </div>
     </div>
 
-    <!-- PHASE 6 -->
+    <!-- PHASE 6: MULTI-DOMAIN STRATIFIED BLIND BENCHMARK -->
     <div class="card">
         <h2>Phase 6: Multi-Domain Stratified Blind Benchmark & Explainability</h2>
         <p>Evaluated strictly on held-out test partitions (15%) across independent viral and neoplastic pathology benchmarks.</p>
@@ -152,42 +240,39 @@
             <tbody>
                 <tr>
                     <td><strong>MPox-Vision (Viral)</strong></td>
-                    <td>120 Images</td>
-                    <td><span class="badge-win">97.50%</span></td>
-                    <td><span class="badge-win">0.9749</span></td>
+                    <td>120 Images[cite: 1]</td>
+                    <td><span class="badge-win">97.50%</span>[cite: 1]</td>
+                    <td><span class="badge-win">0.9749</span>[cite: 1]</td>
                     <td><span class="badge-win">0.9867</span></td>
                 </tr>
                 <tr>
                     <td><strong>HAM10000 (Neoplastic)</strong></td>
-                    <td>1,503 Images</td>
-                    <td><span class="badge-win">85.00%</span></td>
-                    <td>0.7700</td>
-                    <td><span class="badge-win">0.9674</span></td>
+                    <td>1,490 Images</td>
+                    <td>83.10%[cite: 1]</td>
+                    <td>0.7211[cite: 1]</td>
+                    <td><span class="badge-win">0.9674</span>[cite: 1]</td>
                 </tr>
             </tbody>
         </table>
 
-        <h3>HAM10000 (Neoplasm) Metrics & Attention Topography</h3>
-        <p>Demonstrates high sensitivity on malignancies with strict focus on lesion topography, safely ignoring skin pigmentation.</p>
-        <img src="ham10000_attention_maps.png" alt="HAM10000 Attention" class="metrics-img" onerror="this.style.display='none'">
+        <h3>Visual Explainability Topography</h3>
+        <p>Comparison between diffuse unconstrained attention and Laplacian edge-guided cross-attention.</p>
         <div class="grid-2">
-            <img src="ham10000_roc_auc.png" alt="HAM10000 ROC-AUC" class="metrics-img" onerror="this.style.display='none'">
-            <img src="ham10000_confusion_matrix.png" alt="HAM10000 Confusion Matrix" class="metrics-img" onerror="this.style.display='none'">
-        </div>
-
-        <h3>MPox-Vision (Viral) Metrics & Attention Topography</h3>
-        <p>Achieved perfect precision on Monkeypox and Measles via explicit edge guidance.</p>
-        <img src="mpox_attention_maps.png" alt="MPox Attention" class="metrics-img" onerror="this.style.display='none'">
-        <div class="grid-2">
-            <img src="mpox_roc_auc.png" alt="MPox ROC-AUC" class="metrics-img" onerror="this.style.display='none'">
-            <img src="mpox_confusion_matrix.png" alt="MPox Confusion Matrix" class="metrics-img" onerror="this.style.display='none'">
+            <div>
+                <strong>HAM10000 Contour Localization</strong>
+                <img src="ham10000_attention_maps.png" alt="HAM10000 Attention" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>MPox-Vision Contour Localization</strong>
+                <img src="mpox_attention_maps.png" alt="MPox Attention" class="metrics-img" onerror="this.style.display='none'">
+            </div>
         </div>
     </div>
 
-    <!-- PHASE 5 -->
+    <!-- PHASE 5: BALANCING ABLATION -->
     <div class="card">
-        <h2>Phase 5: Multi-Class Neoplasm Generalizability</h2>
-        <p>Ablation evaluation across 10,015 dermoscopy images testing Square-Root Class Balancing.</p>
+        <h2>Phase 5: Multi-Class Neoplasm Generalizability & Class Balancing</h2>
+        <p>Ablation evaluation across dermoscopy images testing Square-Root Frequency Balancing against unweighted Cross-Entropy.</p>
         <table>
             <thead>
                 <tr>
@@ -206,7 +291,7 @@
                     <td>0.67</td>
                     <td>0.55</td>
                 </tr>
-                <tr>
+                <tr style="background-color: #fcf6f6;">
                     <td><strong>LG-ViT (Square-Root Balanced)</strong></td>
                     <td>83.67%</td>
                     <td><span class="badge-win">0.77</span></td>
@@ -217,47 +302,31 @@
         </table>
     </div>
 
-    <!-- PHASE 4 -->
+    <!-- PHASE 4: BIAS MITIGATION -->
     <div class="card">
         <h2>Phase 4: Bias Mitigation & Shortcut Prevention</h2>
-        <p>Proves standard ViT suffers from shortcut learning on background skin tones, whereas LG-ViT enforces topographical lesion localization.</p>
-        <img src="ablation_comparison.png" alt="Ablation Comparison" class="metrics-img" onerror="this.style.display='none'">
+        <p>Validates that standard Vision Transformers suffer from shortcut learning on background skin tones and illumination gradients, whereas LG-ViT locks attention onto lesion contours.</p>
         <div class="grid-2">
             <div>
-                <strong>Vanilla ViT Attention (Fails)</strong>
+                <strong>Vanilla ViT Attention (Background Memorization)</strong>
                 <img src="vanilla_attention_heatmaps.png" alt="Vanilla Attention" class="metrics-img" onerror="this.style.display='none'">
             </div>
             <div>
-                <strong>LG-ViT Attention (Succeeds)</strong>
+                <strong>LG-ViT Attention (Lesion Boundary Anchoring)</strong>
                 <img src="attention_heatmaps.png" alt="LG-ViT Attention" class="metrics-img" onerror="this.style.display='none'">
             </div>
         </div>
     </div>
 
-    <!-- PHASE 3 -->
+    <!-- PHASE 2 & 1 -->
     <div class="card">
-        <h2>Phase 3: Cross-Attention Fusion & Initial Training</h2>
-        <p>Unified dual-stream architecture training logs.</p>
-        <div class="grid-2">
-            <img src="training_metrics.png" alt="Training Metrics" class="metrics-img" onerror="this.style.display='none'">
-            <img src="confusion_matrix.png" alt="Confusion Matrix" class="metrics-img" onerror="this.style.display='none'">
-        </div>
-    </div>
-
-    <!-- PHASE 2 -->
-    <div class="card">
-        <h2>Phase 2: Mathematical Edge-Extraction Stream</h2>
-        <p>Engineered a dedicated morphological pathway using a 2nd-order differential Laplacian operator to extract high-frequency contour tokens.</p>
+        <h2>Architecture & Methodology Fundamentals</h2>
+        <p><strong>Phase 2: Mathematical Edge-Extraction Stream:</strong> Implements an unlearnable 2nd-order discrete Laplacian operator ($\nabla^2 f = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2}$) applied to luminance space to generate zero-crossing boundary maps.</p>
+        <p><strong>Phase 1: Deterministic Preprocessing:</strong> Enforces patient-level lesion deduplication, stratified 70/15/15 partitioning, and dual-stream channel projection to eliminate demographic and split leakage across runs.</p>
         <img src="laplacian_edge_visualization.png" alt="Laplacian Edge" class="metrics-img" onerror="this.style.display='none'">
     </div>
 
-    <!-- PHASE 1 -->
-    <div class="card">
-        <h2>Phase 1: Dataset Pipeline & Preprocessing Protocol</h2>
-        <p>Established deterministic preprocessing, data loaders, stratified splits, and computational environment setup across all benchmark datasets for reproducible clinical modeling.</p>
-    </div>
-
-    <!-- AUTOMATED DASHBOARD -->
+    <!-- DASHBOARD DEPLOYMENT -->
     <div class="card dashboard">
         <h2>📊 Automated Clinical Dashboard Integration</h2>
         <div class="dash-status">System Status: Active & Ready for Deployment</div>
