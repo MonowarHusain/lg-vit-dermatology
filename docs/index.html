@@ -70,15 +70,133 @@
             Author: Monowar Husain | Course: CSE463 Project
         </div>
         <div class="project-desc">
-            This research introduces a dual-stream morphological cross-attention mechanism to mitigate bias in dermatological AI. By integrating a 2nd-order Laplacian edge-extraction pathway, LG-ViT enforces strict anatomical localization and eliminates shortcut learning on background skin tones. The architecture is rigorously benchmarked across 20,000 dermoscopy images (Skin2025), deduplicated multi-class pre-cancerous neoplasms (HAM10000), and viral rash pathologies (MPox-Vision)[cite: 1].
+            This research introduces a dual-stream morphological cross-attention mechanism to mitigate bias in dermatological AI. By integrating an unlearnable 2nd-order Laplacian edge-extraction pathway, LG-ViT enforces anatomical boundary localization and eliminates shortcut learning on ambient skin tones. The architecture has been comprehensively evaluated against modernized pure CNNs (ConvNeXt-Base) and hierarchical vision transformers (Swin-Base) across 20,000 dermoscopy images (Skin2025), patient-deduplicated multi-class neoplasms (HAM10000), and viral rash benchmarks (MPox-Vision).
+        </div>
+    </div>
+
+    <!-- PHASE 7: SKIN2025 BENCHMARK MATRIX -->
+    <div class="card">
+        <div class="timestamp">Phase 7: Skin2025 Master Benchmark Complete</div>
+        <h2>Phase 7: Skin2025 Large-Scale Benchmark & Baseline Comparison</h2>
+        <p>Evaluated on the 20,000-image Skin2025 dataset using a strictly stratified 70/15/15 blind split (3,000 held-out test images). All models were fine-tuned for 10 epochs using Mixed Precision (AMP) and Cosine Annealing schedules.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Model Architecture</th>
+                    <th>Model Family</th>
+                    <th>Training Strategy</th>
+                    <th>Test Acc</th>
+                    <th>Malignant Recall</th>
+                    <th>Benign Specificity</th>
+                    <th>Macro F1</th>
+                    <th>ROC-AUC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Swin-Base</strong></td>
+                    <td>Shifted-Window ViT</td>
+                    <td>Standard LR + AMP</td>
+                    <td><span class="badge-win">98.90%</span></td>
+                    <td><span class="badge-win">99.20%</span></td>
+                    <td><span class="badge-win">98.60%</span></td>
+                    <td><span class="badge-win">0.9890</span></td>
+                    <td><span class="badge-win">0.9987</span></td>
+                </tr>
+                <tr>
+                    <td><strong>ConvNeXt-Base</strong></td>
+                    <td>Modern Pure CNN</td>
+                    <td>Standard LR + AMP</td>
+                    <td>98.77%</td>
+                    <td>99.13%</td>
+                    <td>98.40%</td>
+                    <td>0.9877</td>
+                    <td>0.9985</td>
+                </tr>
+                <tr style="background-color: #f0fdf4;">
+                    <td><strong class="badge-proposed">LG-ViT (Fine-Tune V1)</strong></td>
+                    <td>Laplacian Dual-Stream</td>
+                    <td>Differential LR (1e-5 / 3e-4)</td>
+                    <td>97.97%</td>
+                    <td>97.80%</td>
+                    <td>98.13%</td>
+                    <td>0.9797</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>Vanilla ViT-Base (Baseline)</td>
+                    <td>Global Self-Attention</td>
+                    <td>Standard LR + AMP</td>
+                    <td>97.73%</td>
+                    <td>98.53%</td>
+                    <td>96.93%</td>
+                    <td>0.9773</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>LG-ViT (Run 1)</td>
+                    <td>Laplacian Dual-Stream</td>
+                    <td>Uniform LR</td>
+                    <td>95.83%</td>
+                    <td>96.72%</td>
+                    <td>94.95%</td>
+                    <td>0.9583</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Skin2025 Confusion Matrices</h3>
+        <div class="grid-2">
+            <div>
+                <strong>ConvNeXt-Base Confusion Matrix</strong>
+                <img src="convnext_skin2025_confusion_matrix.png" alt="ConvNeXt Skin2025 CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>Swin-Base Confusion Matrix</strong>
+                <img src="swin_skin2025_confusion_matrix.png" alt="Swin Skin2025 CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <strong>Vanilla ViT Confusion Matrix</strong>
+                <img src="vanilla_skin2025_confusion_matrix.png" alt="Vanilla ViT CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>LG-ViT (Fine-Tune V1) Confusion Matrix</strong>
+                <img src="lgvit_skin2025_cm.png" alt="LG-ViT CM" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <h3>Skin2025 ROC-AUC Performance</h3>
+        <div class="grid-2">
+            <div>
+                <strong>ConvNeXt-Base ROC-AUC Curve</strong>
+                <img src="convnext_skin2025_roc_auc.png" alt="ConvNeXt Skin2025 ROC" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>Swin-Base ROC-AUC Curve</strong>
+                <img src="swin_skin2025_roc_auc.png" alt="Swin Skin2025 ROC" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <strong>Vanilla ViT ROC-AUC Curve</strong>
+                <img src="vanilla_skin2025_roc_auc.png" alt="Vanilla ViT ROC" class="metrics-img" onerror="this.style.display='none'">
+            </div>
+            <div>
+                <strong>LG-ViT ROC-AUC Curve</strong>
+                <img src="lgvit_skin2025_roc.png" alt="LG-ViT ROC" class="metrics-img" onerror="this.style.display='none'">
+            </div>
         </div>
     </div>
 
     <!-- HAM10000 BENCHMARK MATRIX (CONVNEXT + SWIN + LG-VIT) -->
     <div class="card">
-        <div class="timestamp">Last Updated: Kaggle GPU Benchmark Suite</div>
+        <div class="timestamp">Phase 6: Multi-Class Neoplasm Deduplicated Benchmark</div>
         <h2>HAM10000: 7-Class Deduplicated Architectural Comparison (15% Blind Test)</h2>
-        <p>Evaluated on the official held-out test split (1,490 unique lesion instances) to ablate pure-CNN inductive bias, shifted-window Transformers, and morphological contour cross-attention.</p>
+        <p>Evaluated on the official held-out test split (1,490 unique lesion instances) to ablate pure-CNN inductive bias, shifted-window Transformers, and morphological contour cross-attention under severe class imbalance.</p>
         
         <table>
             <thead>
@@ -114,27 +232,27 @@
                 <tr style="background-color: #fcf6f6;">
                     <td><strong class="badge-proposed">LG-ViT (Proposed)</strong></td>
                     <td>Laplacian Dual-Stream ViT</td>
-                    <td>83.10%[cite: 1]</td>
-                    <td>0.7211[cite: 1]</td>
-                    <td>0.9674[cite: 1]</td>
+                    <td>83.10%</td>
+                    <td>0.7211</td>
+                    <td>0.9674</td>
                     <td><span class="badge-win">69.00%</span></td>
-                    <td><span class="badge-win">85.71%</span>[cite: 1]</td>
+                    <td><span class="badge-win">85.71%</span></td>
                 </tr>
                 <tr>
                     <td><em>Vanilla ViT-Base (Baseline)*</em></td>
                     <td>Global Self-Attention</td>
-                    <td>95.07%[cite: 1]</td>
-                    <td>0.9218[cite: 1]</td>
+                    <td>95.07%</td>
+                    <td>0.9218</td>
                     <td>—</td>
-                    <td>82.63%[cite: 1]</td>
-                    <td>91.84%[cite: 1]</td>
+                    <td>82.63%</td>
+                    <td>91.84%</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="callout">
-            <strong>Clinical Safety Audit:</strong> Unconstrained Vision Transformers (Swin-Base) suffer a catastrophic drop on minority lethal classes, detecting under 50% of true Melanomas (49.69% MEL Recall). LG-ViT’s explicit boundary guidance resolves this failure mode, achieving <strong>69.00% Melanoma Recall (+19.31% over Swin)</strong> and <strong>85.71% Actinic Keratosis Recall (+10.15% over ConvNeXt)</strong>[cite: 1].
-            <br><em>*Vanilla ViT baseline reflects early exploratory run evaluated prior to patient-level deduplication[cite: 1].</em>
+            <strong>Clinical Safety Audit:</strong> Unconstrained Vision Transformers (Swin-Base) suffer a catastrophic sensitivity collapse on lethal minority classes, missing over half of Melanoma cases (49.69% MEL Recall). LG-ViT’s explicit boundary guidance resolves this failure mode, achieving <strong>69.00% Melanoma Recall (+19.31% over Swin)</strong> and <strong>85.71% Actinic Keratosis Recall (+10.15% over ConvNeXt)</strong>.
+            <br><em>*Vanilla ViT baseline reflects an early exploratory run evaluated prior to patient-level deduplication.</em>
         </div>
 
         <h3>HAM10000 Diagnostic Figures & Curves</h3>
@@ -160,72 +278,10 @@
         </div>
     </div>
 
-    <!-- PHASE 7: SKIN2025 -->
+    <!-- PHASE 6: MULTI-DOMAIN VIRAL BENCHMARK -->
     <div class="card">
-        <div class="timestamp">Phase 7 Benchmark</div>
-        <h2>Phase 7: Skin2025 Large-Scale Benchmark & Differential Fine-Tuning</h2>
-        <p>Evaluated on the 20,000-image Skin2025 dataset using a strictly stratified 70/15/15 blind split. Introduced <strong>Fine-Tune V1</strong>, utilizing layer-wise differential learning rates (1e-5 backbone / 3e-4 custom head), Cosine Annealing, and Mixed Precision (AMP) to prevent catastrophic forgetting in the pretrained ViT layers while rapidly converging the Laplacian cross-attention stream.</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Model Architecture</th>
-                    <th>Training Strategy</th>
-                    <th>Test Acc</th>
-                    <th>Malignant Recall</th>
-                    <th>Benign Specificity</th>
-                    <th>Macro F1</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Vanilla ViT-Base (Baseline)</td>
-                    <td>Standard LR + AMP</td>
-                    <td>97.73%[cite: 1]</td>
-                    <td><span class="badge-win">98.53%</span>[cite: 1]</td>
-                    <td>96.93%[cite: 1]</td>
-                    <td>0.9773[cite: 1]</td>
-                </tr>
-                <tr>
-                    <td>LG-ViT (Run 1)</td>
-                    <td>Uniform LR</td>
-                    <td>95.83%[cite: 1]</td>
-                    <td>96.72%[cite: 1]</td>
-                    <td>94.95%[cite: 1]</td>
-                    <td>0.9583[cite: 1]</td>
-                </tr>
-                <tr style="background-color: #f0fdf4;">
-                    <td><strong>LG-ViT (Fine-Tune V1)</strong></td>
-                    <td><strong>Differential LR (1e-5 / 3e-4)</strong></td>
-                    <td><span class="badge-win">97.97%</span>[cite: 1]</td>
-                    <td>97.80%[cite: 1]</td>
-                    <td><span class="badge-win">98.13%</span>[cite: 1]</td>
-                    <td><span class="badge-win">0.9797</span>[cite: 1]</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>Skin2025 Confusion Matrices & ROC Curves</h3>
-        <div class="grid-2">
-            <div>
-                <strong>Vanilla ViT (Baseline)</strong>
-                <img src="vanilla_skin2025_confusion_matrix.png" alt="Vanilla ViT CM" class="metrics-img" onerror="this.style.display='none'">
-            </div>
-            <div>
-                <strong>LG-ViT (Fine-Tune V1)</strong>
-                <img src="lgvit_skin2025_cm.png" alt="LG-ViT CM" class="metrics-img" onerror="this.style.display='none'">
-            </div>
-        </div>
-        <div class="grid-2">
-            <img src="vanilla_skin2025_roc_auc.png" alt="Vanilla ViT ROC" class="metrics-img" onerror="this.style.display='none'">
-            <img src="lgvit_skin2025_roc.png" alt="LG-ViT ROC" class="metrics-img" onerror="this.style.display='none'">
-        </div>
-    </div>
-
-    <!-- PHASE 6: MULTI-DOMAIN STRATIFIED BLIND BENCHMARK -->
-    <div class="card">
-        <h2>Phase 6: Multi-Domain Stratified Blind Benchmark & Explainability</h2>
-        <p>Evaluated strictly on held-out test partitions (15%) across independent viral and neoplastic pathology benchmarks.</p>
+        <h2>Phase 6: Multi-Domain Stratified Blind Benchmark (MPox-Vision)</h2>
+        <p>Evaluated strictly on held-out test partitions (120 images) across infectious viral rashes to verify cross-domain anatomical boundary anchoring.</p>
         
         <table>
             <thead>
@@ -240,17 +296,10 @@
             <tbody>
                 <tr>
                     <td><strong>MPox-Vision (Viral)</strong></td>
-                    <td>120 Images[cite: 1]</td>
-                    <td><span class="badge-win">97.50%</span>[cite: 1]</td>
-                    <td><span class="badge-win">0.9749</span>[cite: 1]</td>
+                    <td>120 Images</td>
+                    <td><span class="badge-win">97.50%</span></td>
+                    <td><span class="badge-win">0.9749</span></td>
                     <td><span class="badge-win">0.9867</span></td>
-                </tr>
-                <tr>
-                    <td><strong>HAM10000 (Neoplastic)</strong></td>
-                    <td>1,490 Images</td>
-                    <td>83.10%[cite: 1]</td>
-                    <td>0.7211[cite: 1]</td>
-                    <td><span class="badge-win">0.9674</span>[cite: 1]</td>
                 </tr>
             </tbody>
         </table>
@@ -321,7 +370,7 @@
     <!-- PHASE 2 & 1 -->
     <div class="card">
         <h2>Architecture & Methodology Fundamentals</h2>
-        <p><strong>Phase 2: Mathematical Edge-Extraction Stream:</strong> Implements an unlearnable 2nd-order discrete Laplacian operator ($\nabla^2 f = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2}$) applied to luminance space to generate zero-crossing boundary maps.</p>
+        <p><strong>Phase 2: Mathematical Edge-Extraction Stream:</strong> Implements an unlearnable 2nd-order discrete Laplacian operator (&nabla;<sup>2</sup>f = &part;<sup>2</sup>f/&part;x<sup>2</sup> + &part;<sup>2</sup>f/&part;y<sup>2</sup>) applied to luminance space to generate zero-crossing boundary maps.</p>
         <p><strong>Phase 1: Deterministic Preprocessing:</strong> Enforces patient-level lesion deduplication, stratified 70/15/15 partitioning, and dual-stream channel projection to eliminate demographic and split leakage across runs.</p>
         <img src="laplacian_edge_visualization.png" alt="Laplacian Edge" class="metrics-img" onerror="this.style.display='none'">
     </div>
