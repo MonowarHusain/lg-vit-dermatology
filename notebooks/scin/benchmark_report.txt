@@ -1,0 +1,38 @@
+============================================================
+SCIN BENCHMARK EVALUATION REPORT (ViT-Base Baseline)
+============================================================
+Model: Vision Transformer Base (vit_base_patch16_224)
+Pretrained: ImageNet-21k fine-tuned on 1k (timm)
+Dataset: SCIN (Skin Condition Image Network)
+Total Samples: 1,700 | Split: 80/20 (Train: 1,360, Val: 340)
+Conditions: 10 primary classes
+Hardware: NVIDIA GeForce RTX 3070 Ti (FP16 Mixed Precision)
+
+============================================================
+SUMMARY PERFORMANCE METRICS
+============================================================
+Top-1 Validation Accuracy : 38.00%
+Macro Average F1-Score    : 0.3500 (35.00%)
+Weighted Average F1-Score : 0.3700 (37.00%)
+Micro-Average ROC AUC     : 0.82
+Macro-Average ROC AUC     : 0.76
+
+============================================================
+DETAILED PER-CLASS CLASSIFICATION REPORT
+============================================================
+Condition                    Precision    Recall    F1-Score    Support
+----------------------------------------------------------------------
+Eczema                            0.45      0.52        0.48         91
+Allergic Contact Dermatitis       0.23      0.32        0.27         57
+Urticaria                         0.40      0.54        0.46         39
+Insect Bite                       0.39      0.35        0.37         40
+Folliculitis                      0.40      0.21        0.27         29
+Psoriasis                         0.50      0.21        0.29         24
+Tinea                             0.44      0.21        0.29         19
+Impetigo                          0.33      0.27        0.30         15
+Herpes Zoster                     0.40      0.31        0.35         13
+Pigmented purpuric eruption       0.46      0.46        0.46         13
+----------------------------------------------------------------------
+accuracy                                                0.38        340
+macro avg                         0.40      0.34        0.35        340
+weighted avg                      0.39      0.38        0.37        340
