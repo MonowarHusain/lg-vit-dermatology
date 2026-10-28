@@ -1,0 +1,92 @@
+{
+    "best_epoch": 13,
+    "best_val_acc": 37.94117647058823,
+    "best_macro_f1": 35.34438067863063,
+    "classes": [
+        "Eczema",
+        "Allergic Contact Dermatitis",
+        "Urticaria",
+        "Insect Bite",
+        "Folliculitis",
+        "Psoriasis",
+        "Tinea",
+        "Impetigo",
+        "Herpes Zoster",
+        "Pigmented purpuric eruption"
+    ],
+    "detailed_report": {
+        "Eczema": {
+            "precision": 0.44761904761904764,
+            "recall": 0.5164835164835165,
+            "f1-score": 0.47959183673469385,
+            "support": 91.0
+        },
+        "Allergic Contact Dermatitis": {
+            "precision": 0.23076923076923078,
+            "recall": 0.3157894736842105,
+            "f1-score": 0.26666666666666666,
+            "support": 57.0
+        },
+        "Urticaria": {
+            "precision": 0.40384615384615385,
+            "recall": 0.5384615384615384,
+            "f1-score": 0.46153846153846156,
+            "support": 39.0
+        },
+        "Insect Bite": {
+            "precision": 0.3888888888888889,
+            "recall": 0.35,
+            "f1-score": 0.3684210526315789,
+            "support": 40.0
+        },
+        "Folliculitis": {
+            "precision": 0.4,
+            "recall": 0.20689655172413793,
+            "f1-score": 0.2727272727272727,
+            "support": 29.0
+        },
+        "Psoriasis": {
+            "precision": 0.5,
+            "recall": 0.20833333333333334,
+            "f1-score": 0.29411764705882354,
+            "support": 24.0
+        },
+        "Tinea": {
+            "precision": 0.4444444444444444,
+            "recall": 0.21052631578947367,
+            "f1-score": 0.2857142857142857,
+            "support": 19.0
+        },
+        "Impetigo": {
+            "precision": 0.3333333333333333,
+            "recall": 0.26666666666666666,
+            "f1-score": 0.2962962962962963,
+            "support": 15.0
+        },
+        "Herpes Zoster": {
+            "precision": 0.4,
+            "recall": 0.3076923076923077,
+            "f1-score": 0.34782608695652173,
+            "support": 13.0
+        },
+        "Pigmented purpuric eruption": {
+            "precision": 0.46153846153846156,
+            "recall": 0.46153846153846156,
+            "f1-score": 0.46153846153846156,
+            "support": 13.0
+        },
+        "accuracy": 0.37941176470588234,
+        "macro avg": {
+            "precision": 0.40104395604395604,
+            "recall": 0.3382388165373646,
+            "f1-score": 0.35344380678630627,
+            "support": 340.0
+        },
+        "weighted avg": {
+            "precision": 0.39246229260935145,
+            "recall": 0.37941176470588234,
+            "f1-score": 0.37335990791198126,
+            "support": 340.0
+        }
+    }
+}
