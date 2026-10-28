@@ -1,0 +1,57 @@
+============================================================
+SCIN BENCHMARK EVALUATION REPORT (LG-ViT vs Vanilla ViT)
+============================================================
+Model: Lesion-Guided Vision Transformer (LG-ViT)
+Backbone: vit_base_patch16_224 (pretrained: ImageNet-21k fine-tuned on 1k)
+Guidance: Fixed 3x3 Laplacian Edge Extractor + 8-Head Cross-Attention Block
+Dataset: SCIN (Skin Condition Image Network)
+Total Samples: 1,700 | Split: 80/20 (Train: 1,360, Val: 340)
+Conditions: 10 primary classes
+Hardware: NVIDIA GeForce RTX 3070 Ti (FP16 Mixed Precision)
+
+============================================================
+SUMMARY PERFORMANCE METRICS
+============================================================
+Top-1 Validation Accuracy : 37.65%
+Macro Average F1-Score    : 0.3249 (32.49%)
+Weighted Average F1-Score : 0.3666 (36.66%)
+Micro-Average ROC AUC     : 0.82
+Macro-Average ROC AUC     : 0.77
+
+============================================================
+COMPARATIVE SUMMARY (Vanilla ViT vs. LG-ViT)
+============================================================
+Metric                    Vanilla ViT-Base    LG-ViT (Proposed)
+------------------------------------------------------------
+Validation Accuracy             38.00%             37.65%
+Macro Average F1                0.3500             0.3249
+Weighted Average F1             0.3700             0.3666
+Micro-Average ROC AUC             0.82               0.82
+Macro-Average ROC AUC             0.76               0.77
+
+Key Observation:
+- Allergic Contact Dermatitis experienced an F1 surge from 0.27 -> 0.3971 (+12.71%).
+- Herpes Zoster F1 increased from 0.35 -> 0.4444 (+9.44%).
+- Folliculitis precision jumped to 0.5333, and Urticaria F1 remained resilient at 0.4675.
+- Tinea and Pigmented purpuric eruption faced recall suppression due to high edge-texture variance.
+
+============================================================
+DETAILED PER-CLASS CLASSIFICATION REPORT (LG-ViT)
+============================================================
+Condition                    Precision    Recall    F1-Score    Support
+----------------------------------------------------------------------
+Eczema                            0.4151    0.4835      0.4467         91
+Allergic Contact Dermatitis       0.3418    0.4737      0.3971         57
+Urticaria                         0.4737    0.4615      0.4675         39
+Insect Bite                       0.3333    0.2750      0.3014         40
+Folliculitis                      0.5333    0.2759      0.3636         29
+Psoriasis                         0.2857    0.2500      0.2667         24
+Tinea                             0.1429    0.0526      0.0769         19
+Impetigo                          0.2632    0.3333      0.2941         15
+Herpes Zoster                     0.4286    0.4615      0.4444         13
+Pigmented purpuric eruption       0.2500    0.1538      0.1905         13
+----------------------------------------------------------------------
+accuracy                                                0.3765        340
+macro avg                         0.3468    0.3221      0.3249        340
+weighted avg                      0.3731    0.3765      0.3666        340
+============================================================
