@@ -1,0 +1,93 @@
+{
+    "model": "LG-ViT (Lesion-Guided Vision Transformer)",
+    "best_epoch": 10,
+    "best_val_acc": 0.3764705882352941,
+    "best_macro_f1": 0.3248926050895357,
+    "classes": [
+        "Eczema",
+        "Allergic Contact Dermatitis",
+        "Urticaria",
+        "Insect Bite",
+        "Folliculitis",
+        "Psoriasis",
+        "Tinea",
+        "Impetigo",
+        "Herpes Zoster",
+        "Pigmented purpuric eruption"
+    ],
+    "detailed_report": {
+        "Eczema": {
+            "precision": 0.41509433962264153,
+            "recall": 0.4835164835164835,
+            "f1-score": 0.4467005076142132,
+            "support": 91.0
+        },
+        "Allergic Contact Dermatitis": {
+            "precision": 0.34177215189873417,
+            "recall": 0.47368421052631576,
+            "f1-score": 0.39705882352941174,
+            "support": 57.0
+        },
+        "Urticaria": {
+            "precision": 0.47368421052631576,
+            "recall": 0.46153846153846156,
+            "f1-score": 0.4675324675324675,
+            "support": 39.0
+        },
+        "Insect Bite": {
+            "precision": 0.3333333333333333,
+            "recall": 0.275,
+            "f1-score": 0.3013698630136986,
+            "support": 40.0
+        },
+        "Folliculitis": {
+            "precision": 0.5333333333333333,
+            "recall": 0.27586206896551724,
+            "f1-score": 0.36363636363636365,
+            "support": 29.0
+        },
+        "Psoriasis": {
+            "precision": 0.2857142857142857,
+            "recall": 0.25,
+            "f1-score": 0.26666666666666666,
+            "support": 24.0
+        },
+        "Tinea": {
+            "precision": 0.14285714285714285,
+            "recall": 0.05263157894736842,
+            "f1-score": 0.07692307692307693,
+            "support": 19.0
+        },
+        "Impetigo": {
+            "precision": 0.2631578947368421,
+            "recall": 0.3333333333333333,
+            "f1-score": 0.29411764705882354,
+            "support": 15.0
+        },
+        "Herpes Zoster": {
+            "precision": 0.42857142857142855,
+            "recall": 0.46153846153846156,
+            "f1-score": 0.4444444444444444,
+            "support": 13.0
+        },
+        "Pigmented purpuric eruption": {
+            "precision": 0.25,
+            "recall": 0.15384615384615385,
+            "f1-score": 0.19047619047619047,
+            "support": 13.0
+        },
+        "accuracy": 0.3764705882352941,
+        "macro avg": {
+            "precision": 0.3467518120594057,
+            "recall": 0.3220950752212095,
+            "f1-score": 0.3248926050895357,
+            "support": 340.0
+        },
+        "weighted avg": {
+            "precision": 0.3731426686421303,
+            "recall": 0.3764705882352941,
+            "f1-score": 0.3665981936918461,
+            "support": 340.0
+        }
+    }
+}
