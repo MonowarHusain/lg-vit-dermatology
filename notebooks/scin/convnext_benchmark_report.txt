@@ -1,0 +1,37 @@
+============================================================
+SCIN BENCHMARK EVALUATION REPORT (ConvNeXt-Base Backbone)
+============================================================
+Model: ConvNeXt Base (convnext_base)
+Pretrained: ImageNet-1k default (timm)
+Dataset: SCIN (Skin Condition Image Network)
+Total Samples: 1,700 | Split: 80/20 (Train: 1,360, Val: 340)
+Conditions: 10 primary classes
+Hardware: NVIDIA GeForce RTX 3070 Ti (FP16 Mixed Precision)
+
+============================================================
+SUMMARY PERFORMANCE METRICS
+============================================================
+Top-1 Validation Accuracy : 45.59%
+Macro Average F1-Score    : 0.4131 (41.31%)
+Weighted Average F1-Score : 0.4455 (44.55%)
+Gain over Vanilla ViT     : +7.59% Accuracy | +6.31% Macro F1
+
+============================================================
+DETAILED PER-CLASS CLASSIFICATION REPORT
+============================================================
+Condition                    Precision    Recall    F1-Score    Support
+----------------------------------------------------------------------
+Eczema                            0.4874      0.6374        0.5524         91
+Allergic Contact Dermatitis       0.4000      0.3860        0.3929         57
+Urticaria                         0.5610      0.5897        0.5750         39
+Insect Bite                       0.3226      0.2500        0.2817         40
+Folliculitis                      0.3947      0.5172        0.4478         29
+Psoriasis                         0.7500      0.3750        0.5000         24
+Tinea                             0.3333      0.1579        0.2143         19
+Impetigo                          0.5000      0.4000        0.4444         15
+Herpes Zoster                     0.4615      0.4615        0.4615         13
+Pigmented purpuric eruption       0.3000      0.2308        0.2609         13
+----------------------------------------------------------------------
+accuracy                                                0.4559        340
+macro avg                         0.4511      0.4006        0.4131        340
+weighted avg                      0.4562      0.4559        0.4455        340

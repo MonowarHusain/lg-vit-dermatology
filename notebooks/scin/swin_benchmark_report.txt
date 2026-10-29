@@ -1,0 +1,49 @@
+============================================================
+SCIN BENCHMARK EVALUATION REPORT (Swin-Base Backbone)
+============================================================
+Model: Swin Transformer Base (swin_base_patch4_window7_224)
+Pretrained: ImageNet-1k default (timm)
+Dataset: SCIN (Skin Condition Image Network)
+Total Samples: 1,700 | Split: 80/20 (Train: 1,360, Val: 340)
+Conditions: 10 primary classes
+Seed: 42
+Hardware: NVIDIA GeForce RTX 3070 Ti (FP16 Mixed Precision)
+
+============================================================
+SUMMARY PERFORMANCE METRICS
+============================================================
+Top-1 Validation Accuracy : 42.65%
+Macro Average F1-Score    : 0.3787 (37.87%)
+Weighted Average F1-Score : 0.4183 (41.83%)
+Gain over Vanilla ViT-Base: +4.65% Accuracy | +2.87% Macro F1
+
+============================================================
+DETAILED PER-CLASS CLASSIFICATION REPORT
+============================================================
+Condition                    Precision    Recall    F1-Score    Support
+----------------------------------------------------------------------
+Eczema                            0.4672      0.6264        0.5352         91
+Allergic Contact Dermatitis       0.3636      0.3509        0.3571         57
+Urticaria                         0.6176      0.5385        0.5753         39
+Insect Bite                       0.4545      0.2500        0.3226         40
+Folliculitis                      0.3077      0.2759        0.2909         29
+Psoriasis                         0.4231      0.4583        0.4400         24
+Tinea                             0.4545      0.2632        0.3333         19
+Impetigo                          0.1875      0.2000        0.1935         15
+Herpes Zoster                     0.3158      0.4615        0.3750         13
+Pigmented purpuric eruption       0.4444      0.3077        0.3636         13
+----------------------------------------------------------------------
+accuracy                                                0.4265        340
+macro avg                         0.4036      0.3732        0.3787        340
+weighted avg                      0.4292      0.4265        0.4183        340
+
+============================================================
+SCIN 4-WAY COMPARATIVE BENCHMARK SUMMARY
+============================================================
+Model                  Accuracy    Macro F1    Weighted F1
+------------------------------------------------------------
+Vanilla ViT-Base        38.00%      0.3500       0.3700
+LG-ViT                  37.65%      0.3249       0.3666
+Swin-Base               42.65%      0.3787       0.4183
+ConvNeXt-Base           45.59%      0.4131       0.4455
+============================================================
